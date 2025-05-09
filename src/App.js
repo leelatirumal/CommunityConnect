@@ -13,8 +13,9 @@ import CustomerOrders from './Components/CustomerOrders';
 function App() {
   return (
     <>
-    <BrowserRouter>
+<BrowserRouter basename="/CommunityConnect">
       <Routes>
+        
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/serviceprovider" element={<ServiceProvider />} />
