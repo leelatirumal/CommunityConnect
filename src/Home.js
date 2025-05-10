@@ -9,7 +9,7 @@ function Home() {
     <Navbar/> 
 
     <div className='container row ' >
-        <div className='mt-5 col-6 '>
+        <div className='mt-5 col-12 col-lg-6  '>
           <h3>
             No More 
             <br/>
@@ -25,7 +25,7 @@ function Home() {
 
         </div>
 
-        <div className='col-6'>
+        <div className='col-12 col-lg-6'>
           <img  style={{height:'500px',width:'700px'}}src='https://cmexpertise.com/wp-content/uploads/2022/05/home-services-banner.svg'/>
         </div>
     </div>
