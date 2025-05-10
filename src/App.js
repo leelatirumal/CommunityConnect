@@ -9,6 +9,8 @@ import ServiceProviderDashboard from './Components/ServiceProviderDashboard';
 import DashboardWrapper from './Components/DashboardWrapper';
 import service from './service'
 import CustomerOrders from './Components/CustomerOrders';
+import AboutUs from './Components/AboutUs';
+import ContactUs from './Components/ContactUs';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/serviceprovider" element={<ServiceProvider />} />
         <Route path="/serviceproviderdashboard" element={<ServiceProviderDashboard />} />
         <Route path="/dashboard" element={<DashboardWrapper />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path='/contactus' element={<ContactUs/> } />
         <Route path="/customerorders" element={<CustomerOrders/>} />
         <Route path="/customerdashboard" element={<CustomerDashboard />} />
 

@@ -1,7 +1,9 @@
 import React from 'react'
 import Navbar from './Components/Navbar'
-
+import { useNavigate } from 'react-router-dom'
 function Home() {
+
+  const navigate=useNavigate();
   return (
     <>
     <Navbar/> 
@@ -18,7 +20,7 @@ function Home() {
             can be used with documents, collections of documents, or the results of queries:
 
           </p>
-          <button className='btn'>About US</button>
+          <button className='btn' onClick={()=>{navigate('/aboutsus')}}>About US</button>
           
 
         </div>

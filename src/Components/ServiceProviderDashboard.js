@@ -1,6 +1,6 @@
 import React, { use, useEffect, useState } from 'react'
 import {auth,db} from "./firebase"
-import { collection, query, where,getDocs } from "firebase/firestore";
+import { collection, query, doc, where,getDocs,updateDoc } from "firebase/firestore";
 
 import './ServiceProviderDashboard.css'
 function ServiceProviderDashboard() {
@@ -9,16 +9,22 @@ function ServiceProviderDashboard() {
   const [orders, setOrders] = useState([]);
 
   const [profileToggle,SetProfileToggle]=useState(false);//profile toggle
-  
   const provider=auth.currentUser;
   const id=provider.uid;
   console.log(id);
+
+  const [refresh, setRefresh] = useState(false);
+
+// call this after accept/decline
+  const triggerRefresh = () => {
+    setRefresh(prev => !prev); // toggles the value to trigger useEffect
+  };
+
 
   //fetching the orders
   useEffect(() => {
   const fetchOrders = async () => {
     try {
-
       const q = query(
         collection(db, "Bookings"),
         where("providerId", "==", id)
@@ -34,11 +40,39 @@ function ServiceProviderDashboard() {
       console.error("Error fetching orders:", error);
     }
   };
-
   if (activeSection === "orders") {
     fetchOrders();
   }
-}, [activeSection]);
+}, [activeSection,refresh]);
+
+//accpeting/declining orders
+  const accept=async (id)=>{
+  const userRef = doc(db, "Bookings", id); // assumes collection is "users" and UID is the doc ID
+
+  try {
+    await updateDoc(userRef, {Status:"Accepted"});
+    console.log("User data updated successfully");
+    triggerRefresh(); // 👈 refreshes order list
+
+  } catch (error) {
+    console.error("Error updating user:", error);
+  }
+  }
+
+
+  //decling
+  const decline=async (id)=>{
+  const userRef = doc(db, "Bookings", id); // assumes collection is "users" and UID is the doc ID
+
+  try {
+    await updateDoc(userRef, {Status:"Declined"});
+    console.log("User data updated successfully");
+    triggerRefresh(); // 👈 refreshes order list
+  } catch (error) {
+    console.error("Error updating user:", error);
+  }
+
+  }
 
 
   return (
@@ -71,29 +105,70 @@ function ServiceProviderDashboard() {
             {activeSection === "dashboard" && <h2>Dashboard Content</h2>}
             {activeSection === "account" && <h2>Account Details</h2>}
             {activeSection === "orders" && 
-            <div className='container-fluid'>
-              <table>
-                <th>Customer</th>
-                <th>Location</th>
-                <th>Time Slot</th>
-                <th>Description</th>
-               <tbody>
-                {
-                  orders.map(order=>
-                    (<tr key={order.id}>
+            <div className="container-fluid mt-4">
+              <div className="table-responsive">
+                <table className="table table-bordered table-hover align-middle">
+                  <thead className="table-dark">
+                    <tr>
+                      <th>Customer</th>
+                      <th>Location</th>
+                      <th>Time Slot</th>
+                      <th>Description</th>
+                      <th>Accept/Decline</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orders.map(order => (
+                      <tr key={order.id}>
                         <td>{order.service}</td>
                         <td>{order.customeraddress}</td>
                         <td>{order.timeslot}</td>
                         <td>{order.description}</td>
+                        <td>
+                          
 
-                    </tr>
-                    )
-                  )
-                }
-               </tbody>
-              </table>
+                          {/*
+                          inpending
+                          */
+                          }
+                          { order.Status ==="pending"  && (
+                            <>
+                              <button className='btn' onClick={()=>{
+                                  accept(order.id)
+                              }}>Accept</button>
+                              <button className='btn' onClick={()=>{
+                                decline(order.id)
+                              }}>Decline</button>
+                            </>                
+                          )
+                          }
+
+
+                          {/*
+                          Accpeted
+                          */}
+                          { order.Status === "Accepted" &&(
+                            <p>Accepted</p>
+                          )
+                          }
+
+                          {/*
+                          Declined
+                          */}
+                          { order.Status === "Declined" &&(
+                            <p>Declined</p>
+                          )
+                          }
+                            
+                         </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-            
+
+                        
             }
             {activeSection === "notifications" && <h2>Notifications Center</h2>}
             {activeSection === "settings" && <h2>Settings Page</h2>}
