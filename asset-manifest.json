@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/CommunityConnect/static/css/main.01035dd1.css",
-    "main.js": "/CommunityConnect/static/js/main.a8bd4bd2.js",
+    "main.css": "/CommunityConnect/static/css/main.ec4745f0.css",
+    "main.js": "/CommunityConnect/static/js/main.7bcd3d23.js",
     "static/js/453.8ce140d4.chunk.js": "/CommunityConnect/static/js/453.8ce140d4.chunk.js",
     "index.html": "/CommunityConnect/index.html",
-    "main.01035dd1.css.map": "/CommunityConnect/static/css/main.01035dd1.css.map",
-    "main.a8bd4bd2.js.map": "/CommunityConnect/static/js/main.a8bd4bd2.js.map",
+    "main.ec4745f0.css.map": "/CommunityConnect/static/css/main.ec4745f0.css.map",
+    "main.7bcd3d23.js.map": "/CommunityConnect/static/js/main.7bcd3d23.js.map",
     "453.8ce140d4.chunk.js.map": "/CommunityConnect/static/js/453.8ce140d4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.01035dd1.css",
-    "static/js/main.a8bd4bd2.js"
+    "static/css/main.ec4745f0.css",
+    "static/js/main.7bcd3d23.js"
   ]
 }
