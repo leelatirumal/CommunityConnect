@@ -30,7 +30,7 @@ function Login() {
         Email: registerEmail,
         FirstName: fname,
         LastName: lname,
-        phoneNumber:phoneNumber
+        PhoneNumber:phoneNumber
       });
       
       console.log('Registered successfully');

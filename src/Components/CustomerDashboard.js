@@ -1,6 +1,7 @@
 import React, { use, useEffect, useState } from 'react'
 import { collection,getFirestore, getDocs, doc,addDoc,getDoc } from 'firebase/firestore';
 import {auth,db} from "./firebase"
+import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import CustomerOrders from './CustomerOrders'
 import './CustomerDashboard.css';
@@ -19,23 +20,17 @@ function CustomerDashboard() {
   const [screen,setScreen]=useState("mainscreen");
 
   //userdata
-          useEffect(() => {
-            // Fetch current user from Firebase Authentication
-            const user = auth.currentUser;
-            
-            // Check if the user exists and log the UID
+
+        useEffect(() => {
+          const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-              console.log(user.uid);
-          
               const fetchUserData = async () => {
-                const db = getFirestore();
-                const docRef = doc(db, "Users", user.uid); // Replace with actual uid
-          
                 try {
+                  const docRef = doc(db, "Users", user.uid);
                   const docSnap = await getDoc(docRef);
                   if (docSnap.exists()) {
-                    console.log(docSnap.data());
                     setUserData(docSnap.data());
+                    setCustomerId(user.uid); // use user.uid directly
                   } else {
                     console.log("No such document!");
                   }
@@ -43,54 +38,45 @@ function CustomerDashboard() {
                   console.error("Error getting document:", error);
                 }
               };
-          
-              fetchUserData(); // Call the async function inside useEffect
+              fetchUserData();
             } else {
-              console.log("No user is logged in");
+              // user is logged out
+              navigate('/login');
             }
-          }, []); // Empty dependency array to run once when component mounts
+          });
+
+          return () => unsubscribe(); // clean up listener on unmount
+        }, []);
+
           
 
-  // Fetch current user from Firebase Authentication
-  useEffect(() => {
-    const user = auth.currentUser;
-    if (user) {
-      setCustomerId(user.uid);  // Store the user ID if logged in
-    } else {
-      navigate('/login');  // Redirect to login if no user
-    }
-  }, [navigate]);
+  // Fetch service provider data from Firebase Authentication 
+      useEffect(()=>{
+            const fetchData= async ()=>{
+            const querySnapshot= await getDocs(collection(db,"ServiceProviders"))
+              const data = querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+              }));
+              setCards(data);
+            };
+            fetchData();
+          })
 
-  
-  useEffect(()=>{
-    const fetchData= async ()=>{
-     const querySnapshot= await getDocs(collection(db,"ServiceProviders"))
-      const data = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setCards(data);
-
-    };
-
-    fetchData();
-  })
-
+  //Booking
   const booking=async()=>{
     try {
-
-
       const bookingData = {
-        customerId , // or null if no auth
+        CustomerId:customerId , // or null if no auth
         //provider
-        providerId: selectedCard.id,
-        providerName: selectedCard.FirstName,
-        service: selectedCard.Service,
-        phone: selectedCard.PhoneNumber,
-        customeraddress:customerAddress,
-        description:description,
-        timeslot:timeSlot, // You can make this dynamic from input
-        timestamp: new Date()
+        ProviderId: selectedCard.id,
+        ProviderName: selectedCard.FirstName,
+        Service: selectedCard.Service,
+        ProviderPhoneNumber: selectedCard.PhoneNumber,
+        CustomerAddress:customerAddress,
+        Description:description,
+        Timeslot:timeSlot, // You can make this dynamic from input
+        Timestamp: new Date()
       };
   
       await addDoc(collection(db, "Bookings"), bookingData);
@@ -99,6 +85,7 @@ function CustomerDashboard() {
     catch(error){
         console.log(error)
     }
+      setSelectedCard(null)
 
   }
 
@@ -173,32 +160,44 @@ function CustomerDashboard() {
 
 
 {selectedCard && (
-        <div className="d-block show " >
-          <div className="">
-            
-              <div className="">
-                <h6>{selectedCard.FirstName}</h6>
-                <p>{selectedCard.Service}</p>
-                <input placeholder='Address'onChange={(e)=>{setCustomerAddress(e.target.value)}} />
-                <input placeholder='Time Slot 1pm-2pm' onChange={(e)=>{setTimeSlot(e.target.value)}}/>
-                <input placeholder='description' onChange={(e)=>{setDescription(e.target.value)}} />
-              </div>
-              <div className="">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={() => setSelectedCard(null)}
-                >
-                  Close
-                </button>
-                <button type="button" className="btn btn-success" onClick={()=>{booking()}}>
-                  Confirm Booking
-                </button>
-              </div>
-            </div>
-          </div>
-      )}
-
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <h5 className="mb-3">{selectedCard.FirstName}</h5>
+      <p className="mb-2"><strong>Service:</strong> {selectedCard.Service}</p>
+      <input
+        className="form-control mb-2"
+        placeholder="Address"
+        onChange={(e) => setCustomerAddress(e.target.value)}
+      />
+      <input
+        className="form-control mb-2"
+        placeholder="Time Slot (e.g. 1pm - 2pm)"
+        onChange={(e) => setTimeSlot(e.target.value)}
+      />
+      <input
+        className="form-control mb-3"
+        placeholder="Description"
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <div className="d-flex justify-content-end">
+        <button
+          type="button"
+          className="btn btn-secondary me-2"
+          onClick={() => setSelectedCard(null)}
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => booking()}
+        >
+          Confirm Booking
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
 </div>
   )
