@@ -27,7 +27,7 @@ function ServiceProviderDashboard() {
     try {
       const q = query(
         collection(db, "Bookings"),
-        where("providerId", "==", id)
+        where("ProviderId", "==", id)
       );
 
       const querySnapshot = await getDocs(q);
@@ -111,7 +111,7 @@ function ServiceProviderDashboard() {
                   <thead className="table-dark">
                     <tr>
                       <th>Customer</th>
-                      <th>Location</th>
+                      <th>Address</th>
                       <th>Time Slot</th>
                       <th>Description</th>
                       <th>Accept/Decline</th>
@@ -120,10 +120,10 @@ function ServiceProviderDashboard() {
                   <tbody>
                     {orders.map(order => (
                       <tr key={order.id}>
-                        <td>{order.service}</td>
-                        <td>{order.customeraddress}</td>
-                        <td>{order.timeslot}</td>
-                        <td>{order.description}</td>
+                        <td>{order.CustomerName}</td>
+                        <td>{order.CustomerAddress}</td>
+                        <td>{order.TimeSlot}</td>
+                        <td>{order.Description}</td>
                         <td>
                           
 
@@ -131,7 +131,7 @@ function ServiceProviderDashboard() {
                           inpending
                           */
                           }
-                          { order.Status ==="pending"  && (
+                          { order.Status ==="Pending"  && (
                             <>
                               <button className='btn' onClick={()=>{
                                   accept(order.id)
@@ -156,7 +156,7 @@ function ServiceProviderDashboard() {
                           Declined
                           */}
                           { order.Status === "Declined" &&(
-                            <p>Declined</p>
+                            <p >Declined</p>
                           )
                           }
                             

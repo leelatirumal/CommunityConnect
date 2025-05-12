@@ -67,16 +67,20 @@ function CustomerDashboard() {
   const booking=async()=>{
     try {
       const bookingData = {
-        CustomerId:customerId , // or null if no auth
+        //customer
+        CustomerId:customerId ,
+        CustomerName:userdata.FirstName,
+        CustomerAddress:customerAddress,
         //provider
         ProviderId: selectedCard.id,
         ProviderName: selectedCard.FirstName,
         Service: selectedCard.Service,
         ProviderPhoneNumber: selectedCard.PhoneNumber,
-        CustomerAddress:customerAddress,
+
         Description:description,
-        Timeslot:timeSlot, // You can make this dynamic from input
-        Timestamp: new Date()
+        Status:"Pending",
+        TimeSlot:timeSlot, // You can make this dynamic from input
+        TimeStamp: new Date()
       };
   
       await addDoc(collection(db, "Bookings"), bookingData);

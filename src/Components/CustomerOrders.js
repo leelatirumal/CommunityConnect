@@ -8,7 +8,6 @@ function CustomerOrders() {
 
   const user=auth.currentUser;
   const id=user.uid;
-  console.log(id);
 
 
 
@@ -17,7 +16,7 @@ function CustomerOrders() {
       try {
         const q = query(
           collection(db, "Bookings"),
-          where("customerId", "==", id)
+          where("CustomerId", "==", id)
         );
   
         const querySnapshot = await getDocs(q);
@@ -53,11 +52,11 @@ function CustomerOrders() {
                   <tbody>
                     {orders.map(order => (
                       <tr key={order.id}>
-                        <td>{order.providerName}</td>
-                        <td>{order.providernumber}</td>
-                        <td>{order.service}</td>
-                        <td>{order.timeSlot}</td>
-                        <td>{order.description}</td>
+                        <td>{order.ProviderName}</td>
+                        <td>{order.ProviderPhoneNumber}</td>
+                        <td>{order.Service}</td>
+                        <td>{order.TimeSlot}</td>
+                        <td>{order.Description}</td>
                         <td>
                           
 
