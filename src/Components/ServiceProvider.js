@@ -59,20 +59,25 @@ function ServiceProvider() {
     }
   return (
     <>
-    <Navbar2/>
-    <div className='container row d-flex justify-content-around mt-5'>
-    <div className='d-flex col-4'>
+  <Navbar2/>
+ <div className="page-container">
+  <div className="container">
+    <div className="row justify-content-around align-items-start">
+    
+    <div className='col-lg-4 col-md-5 col-12  flex-column justify-content-start mt-4' id='login' >
+      <h2 className='text-center h2'>Login</h2>
       <form className='d-flex flex-column'>
           <label>Email</label>
           <input type='text' value={loginEmail} onChange={(e)=>{setLoginEmail(e.target.value)}}/>
           <label>Password</label>
           <input type='password'value={loginPassword}  onChange={(e)=>{setLoginPassword(e.target.value)}}/>
-          <button type='submit' onClick={login}>Login</button>
-      </form>
+          <button type='submit' className='btn' onClick={login}>Login</button>
+      </form> 
     </div>
 
     
-    <div className=' d-flex col-4'>
+    <div className=' col-lg-4 col-md-5 col-12  flex-column justify-content-start mt-4' id='register'>
+      <h2 className='text-center h2'>Register</h2>
       <form className='d-flex flex-column'>
         <label>FirstName</label>
         <input type='text' onChange={(e)=>{setFname(e.target.value)}}/>
@@ -100,9 +105,12 @@ function ServiceProvider() {
           </select>
         <label>Location</label>
         <input type='text' onChange={(e)=>{setLocation(e.target.value)}}/>
-        <button type='submit'  onClick={Register}>Submit </button>
+        <button type='submit' className='btn' onClick={Register}>Submit </button>
 
       </form>
+    </div>
+
+    </div>
     </div>
     </div>
 </>

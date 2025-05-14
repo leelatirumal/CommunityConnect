@@ -96,7 +96,7 @@ function CustomerDashboard() {
   return (
     <div>
       <div id="navbar" className='container-fluid d-flex' >
-            <a href=''>CommunityConnect</a>
+            <a href='' className='text-white'>CommunityConnect</a>
             <div className='d-none d-md-flex justify-content-center mx-auto'>
               <input placeholder='EnterLocation' type='text' id='location' className='me-3'/>
               <input placeholder='Search' type="text" id='search'/>
@@ -171,17 +171,17 @@ function CustomerDashboard() {
       <input
         className="form-control mb-2"
         placeholder="Address"
-        onChange={(e) => setCustomerAddress(e.target.value)}
+        onChange={(e) => setCustomerAddress(e.target.value)} required
       />
       <input
         className="form-control mb-2"
         placeholder="Time Slot (e.g. 1pm - 2pm)"
-        onChange={(e) => setTimeSlot(e.target.value)}
+        onChange={(e) => setTimeSlot(e.target.value)} required
       />
       <input
         className="form-control mb-3"
         placeholder="Description"
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={(e) => setDescription(e.target.value)} required
       />
       <div className="d-flex justify-content-end">
         <button

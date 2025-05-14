@@ -1,0 +1,45 @@
+/* Style buttons */
+#login button,
+#register button {
+  color: #ffffff;
+  background-color: #0f5499 !important;
+  margin-top: 4px;
+  width: 100%;
+}
+
+/* Input width */
+#login input,
+#register input {
+  width: 100%;
+}
+
+/* Container spacing */
+#login,
+#register {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Label color */
+label {
+  color: #0f5499;
+}
+
+/* Heading color */
+.h2 {
+  color: #0f5499;
+}
+
+/* Page background and spacing */
+.page-container {
+  background-color: #f0f3f8 !important;
+  min-height: calc(100vh - 60px);
+  padding: 30px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

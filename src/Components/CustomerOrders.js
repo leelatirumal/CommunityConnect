@@ -58,8 +58,7 @@ function CustomerOrders() {
                         <td>{order.TimeSlot}</td>
                         <td>{order.Description}</td>
                         <td>
-                          
-
+                    
                           {/*
                           inpending
                           */
