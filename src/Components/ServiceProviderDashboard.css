@@ -1,5 +1,6 @@
 #serbox{
   height: calc(100vh - 60px); /* Replace 80px with your actual header height */
   overflow-y: auto;
-    background-color: rgb(224, 202, 201);
+  background-color:  #f0f3f8;
+  color: #0f5499;
 }

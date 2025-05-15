@@ -11,7 +11,7 @@ function Navbar() {
         navigate('/serviceprovider')
     }
   return (
-   <nav className='navbar navbar-expand-lg bg-black'>
+   <nav className='navbar navbar-expand-lg '>
       <a class="navbar-brand text-white" href="#">CommunityConnect</a>
 
         <div className=' d-flex justify-content-end ms-auto'>
@@ -22,7 +22,11 @@ function Navbar() {
         </div>
 
         <div className='d-flex d-lg-none justify-content-end w-100 ' id='navbar-button'>
-            <button className='btn text-white'onClick={()=>{setToggle(toggle =>!toggle)}}>btn</button>
+            <button className='btn text-white'onClick={()=>{setToggle(toggle =>!toggle)}}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="26" fill="white" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </button>
         </div>
         </div>
 

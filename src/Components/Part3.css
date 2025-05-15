@@ -1,0 +1,17 @@
+#container{
+    background-color: #c6d1e7;
+    margin-top: 20px;
+}
+#container div h4{
+    color: #0e5399;
+}
+
+#container div #box  h5{
+    color: #0e5399;
+}
+#container div #box{
+    border-radius: 10px;
+}
+svg{
+    color: #105499;
+}

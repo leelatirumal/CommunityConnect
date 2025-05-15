@@ -18,7 +18,7 @@ input{
   display: flex;
   align-items: center;
   height: 60px;
-  background-color: black;
+  background-color: #0f5499;
 }
 .modal-overlay {
   position: fixed;

@@ -1,0 +1,25 @@
+#row div h4{
+    color: #0e5399;
+    border-left-style: solid;
+    padding-left: 9px;
+}
+#row div div h5{
+    color: #0e5399;
+    
+}
+#cont{
+    background-color: #f0f3f8;
+}
+#row #left{
+    background-color:white;
+    border-radius: 10px;
+}
+#left div div img{
+    padding: 10%;
+    border-radius: 10px;
+    background-color: #c8cfe9;
+}
+
+#right div  img{
+    border-radius:20px;
+}
