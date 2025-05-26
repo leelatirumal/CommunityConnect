@@ -54,10 +54,29 @@ function Part2() {
                     Our professionals are vetted, trained, and committed to exceeding your expectations.
                      We use the latest tools and techniques to ensure quality and efficiency in every job.</p>
                 <div className='row'>
-                    <img src={process.env.PUBLIC_URL+'/images/Img1.jpg'} id='img1' className='col-lg-6 mt-3 col-sm-12'/>
-                    <img src={process.env.PUBLIC_URL+'/images/Img2.jpg'} id='img2' className='col-lg-6 mt-3  col-sm-12' />
-                    <img src={process.env.PUBLIC_URL+'/images/Img3.jpg'} id='img3' className='col-lg-6 mt-3 col-sm-12'/>
 
+                    <div className='col-lg-6 mt-3 col-sm-12 position-relative'>
+                      <img
+                            src={process.env.PUBLIC_URL + '/images/Img1.jpg'}
+                            id="img1"
+                            className="col-12"
+                            alt="Team"
+                        />
+                        <p className="position-absolute top-0 start-0 ms-4 bg-white bg-opacity-50">
+                            Team Expert
+                        </p>
+
+                    </div>
+
+                    <div className='col-lg-6 mt-3 col-sm-12 position-relative'>
+                    <img src={process.env.PUBLIC_URL+'/images/Img2.jpg'} id='img2'  className='col-12' />
+                    <p className="position-absolute top-0 start-0 ms-4 bg-white bg-opacity-50">Advanced Tools</p>
+                    </div>
+
+                    <div className='col-lg-6 mt-3 col-sm-12 position-relative'>
+                    <img src={process.env.PUBLIC_URL+'/images/Img3.jpg'} id='img3' className='col-12'/>
+                    <p className="position-absolute top-0 start-0 ms-4 bg-white bg-opacity-50" >24/7 Support</p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ function Navbar() {
       <a class="navbar-brand text-white" href="#">CommunityConnect</a>
 
         <div className=' d-flex justify-content-end ms-auto'>
-        <div className=' d-none d-lg-block   align-items-center  '>
+        <div className='d-none d-lg-block   align-items-center  '>
             <button className='btn text-white' onClick={navToService}>Service Provider</button>
             <button className='btn text-white' onClick={navToLogin}>Login</button>
             <button className='btn text-white'>ContactUS</button>
@@ -32,8 +32,8 @@ function Navbar() {
 
         { toggle &&(
             <div className='container d-flex flex-column position-relative '>
-                <button className='btn text-white'>Service Provider</button>
-                <button className='btn text-white'>Login</button>
+                <button className='btn text-white' onClick={navToService}>Service Provider</button>
+                <button className='btn text-white' onClick={navToLogin}>Login</button>
                 <button className='btn text-white'>ContactUS</button>
 
             </div>
